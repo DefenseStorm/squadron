@@ -1,5 +1,8 @@
 import threading
-from cherrypy import wsgiserver
+try:
+    from cheroot.wsgi import Server as WSGIServer
+except ImportError:
+    from cherrypy.wsgiserver import CherryPyWSGIServer as WSGIServer
 
 def get_server(address, port, application):
     def _serve(server):
